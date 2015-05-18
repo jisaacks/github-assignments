@@ -8,7 +8,12 @@
   "content_scripts": [ {
       "js": [ "index.js" ],
       "css": [ "main.css" ],
-      "matches": [ "https://github.com/*/Assignments/issues" ]
+      "matches": [
+        "https://github.com/*/assignments/issues",
+        "https://github.com/*/Assignments/issues",
+        "https://github.com/*/assignments/issues?*",
+        "https://github.com/*/Assignments/issues?*"
+      ]
    } ],
 
   "permissions": [

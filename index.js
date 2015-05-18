@@ -48,29 +48,37 @@
         var $item, $count, $user, openState, openIssuesCount = issuesByUser[user];
 
         if ( openIssuesCount > 4 ) {
-          openState = 'danger';
+          openState = 'jd__danger';
         }
         else if (openIssuesCount > 2) {
-          openState = 'caution';
+          openState = 'jd__caution';
         }
         else {
-          openState = 'good';
+          openState = 'jd__good';
         }
 
         $user = document.createElement('em');
         $user.classList.add('jd_open-list-user');
         $user.appendChild(document.createTextNode(user));
 
-
         $count = document.createElement('strong');
-        $count.classList.add('jd_open-list-count-' + openState);
+        $count.classList.add('jd_open-list-count');
         $count.appendChild(document.createTextNode(openIssuesCount));
 
         $item = document.createElement('div');
         $item.classList.add('jd_open-list-item');
+        $item.classList.add(openState);
         $item.appendChild($user);
         $item.appendChild(document.createTextNode(' '));
         $item.appendChild($count);
+        $item.setAttribute("data-user", user);
+        $item.addEventListener("click", function(e){
+          var user = e.currentTarget.getAttribute("data-user");
+          var $input = document.querySelector("#js-issues-search");
+          $input.value = "is:open is:issue assignee:" + user;
+          $form = document.querySelector(".subnav-search");
+          $form.submit();
+        });
 
         $list.appendChild($item);
       });
