@@ -1,3 +1,8 @@
+input.subnav-search-input {
+  width: 300px !important;
+}
+
+
 .jd__open-list {
   clear: both;
 }

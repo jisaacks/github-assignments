@@ -12,7 +12,7 @@
     xhr.send();
   }
 
-  function run() {
+  function showOpenIssues() {
     var matches, owner, repo, url;
 
     matches = window.location.pathname.match(/^\/(.+)\/(.+)\/issues$/);
@@ -89,6 +89,20 @@
       });
 
     }
+  }
+
+  function showReviewButton() {
+    var q = "is:closed -label:Complete -label:duplicate";
+    var $a = document.createElement("a");
+    $a.classList.add('subnav-item');
+    $a.setAttribute("href", window.location.pathname + "?q=" + encodeURIComponent(q));
+    $a.appendChild(document.createTextNode("Review"));
+    document.querySelector(".subnav-links").appendChild($a);
+  }
+
+  function run() {
+    showOpenIssues();
+    showReviewButton();
   }
 
   run();
