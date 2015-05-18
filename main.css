@@ -1,0 +1,24 @@
+.jd__open-list {
+  clear: both;
+}
+
+.jd_open-list-item {
+  padding: 3px;
+}
+
+.jd_open-list-user {
+  min-width: 100px;
+  display: inline-block;
+  text-align: right;
+  margin-right: 5px;
+}
+
+.jd_open-list-count-good {
+  color: green;
+}
+.jd_open-list-count-caution {
+  color: orange;
+}
+.jd_open-list-count-danger {
+  color: red;
+}

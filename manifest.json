@@ -1,0 +1,17 @@
+{
+  "manifest_version": 2,
+
+  "name": "Github Assignments",
+  "description": "This extension shows who is behind on their Github issues",
+  "version": "1.0",
+
+  "content_scripts": [ {
+      "js": [ "index.js" ],
+      "css": [ "main.css" ],
+      "matches": [ "https://github.com/*/Assignments/issues" ]
+   } ],
+
+  "permissions": [
+    "https://api.github.com/"
+  ]
+}
