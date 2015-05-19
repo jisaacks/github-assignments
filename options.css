@@ -1,0 +1,60 @@
+body {
+  font-family: "PT Sans Caption", Helvetica, Arial, sans-serif;
+  font-size 62.5%;
+  background: #abc;
+}
+
+.wrapper {
+  margin: 200px auto;
+  width: 500px;
+  border: 1px solid #def;
+}
+
+h1 {
+  text-align: center;
+}
+
+p {
+  text-align: center;
+}
+
+a {
+  color: #def;
+}
+
+form {
+  margin: 25px;
+}
+
+.add-token, .remove-token {
+  display: none;
+}
+
+.mock-token {
+  display: inline;
+}
+
+.mock-token:before {
+  content: "**********************************************************************************";
+  border: 1px solid #345;
+  font-size: 1em;
+  padding: 4px;
+  padding-top: 5px;
+  color: white;
+  line-height: 1em;
+  height: 1em;
+  background: #bcd;
+}
+
+input {
+  padding: 5px;
+  border: 1px solid #456;
+  width: 400px;
+}
+
+button {
+  background: #def;
+  padding: 5px;
+  border: 1px solid #456;
+  cursor: pointer;
+}

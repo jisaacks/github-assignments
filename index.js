@@ -1,4 +1,5 @@
 (function() {
+  var token;
 
   function getJSON(url, cb) {
     var xhr = new XMLHttpRequest();
@@ -15,6 +16,9 @@
   function showOpenIssues(repo, owner) {
     // FIXME - what if more than 100 open issues?
     url = 'https://api.github.com/repos/'+owner+'/'+repo+'/issues?per_page=100';
+    if (token) {
+      url = url + "&access_token=" + token;
+    }
 
     getJSON(url, function(issues){
       var $list, issuesByUser = [];
@@ -110,17 +114,25 @@
     window.setTimeout(run, 1000);
   }
 
-  // HACK -- cannot override window.pushState from extension
-  // so inject a script into the page that does it.
-  var code = 'var jd__Event = new Event("jd__pushstate");\nvar nativePushState = window.history.pushState;\nwindow.history.pushState = function() {\n  nativePushState.apply(window.history, arguments);\n window.dispatchEvent(jd__Event);\n};';
-  var script = document.createElement("script");
-  script.innerHTML = code;
-  document.querySelector("body").appendChild(script);
+  function start() {
+    // HACK -- cannot override window.pushState from extension
+    // so inject a script into the page that does it.
+    var code = 'var jd__Event = new Event("jd__pushstate");\nvar nativePushState = window.history.pushState;\nwindow.history.pushState = function() {\n  nativePushState.apply(window.history, arguments);\n window.dispatchEvent(jd__Event);\n};';
+    var script = document.createElement("script");
+    script.innerHTML = code;
+    document.querySelector("body").appendChild(script);
 
-  // Rerun after push/pop state
-  window.addEventListener("jd__pushstate", rerun);
-  window.addEventListener("popstate", rerun);
+    // Rerun after push/pop state
+    window.addEventListener("jd__pushstate", rerun);
+    window.addEventListener("popstate", rerun);
 
-  run();
+    run();
+  }
+
+  chrome.storage.sync.get('token', function(items) {
+    token = items.token;
+    start();
+  });
+
 
 })();
