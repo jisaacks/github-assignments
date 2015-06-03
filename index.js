@@ -98,7 +98,7 @@
   function run() {
     var matches, repo, owner;
 
-    matches = window.location.pathname.match(/^\/(.+)\/(.+)\/issues$/);
+    matches = window.location.pathname.match(/^\/(.+)\/(.+)\/issues/);
 
     if (matches) {
       owner = matches[1];
