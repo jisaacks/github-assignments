@@ -31,8 +31,6 @@
         issuesByUser[user]++;
       });
 
-      console.log(issuesByUser);
-
       users = Object.keys(issuesByUser).sort(function(a, b){
         if (issuesByUser[a] > issuesByUser[b]) {
           return 1;
