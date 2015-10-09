@@ -3,7 +3,7 @@
 
   "name": "Github Assignments",
   "description": "This extension shows who is behind on their Github issues",
-  "version": "1.0.4",
+  "version": "1.0.5",
 
   "content_scripts": [ {
       "js": [ "index.js" ],
