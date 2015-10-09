@@ -2,14 +2,21 @@ input.subnav-search-input {
   width: 300px !important;
 }
 
+.subnav {
+  position: relative;
+}
 
 .jd__open-list {
   clear: both;
+  position: absolute;
+  left: -160px;
+  top: 0;
 }
 
 .jd_open-list-item {
   padding: 3px 6px;
-  display: inline-block;
+  display: block;
+  width: 150px;
   border-radius: 3px;
   color: white;
   margin-right: 2px;
@@ -22,11 +29,11 @@ input.subnav-search-input {
 }
 
 .jd__caution {
-  background: #c85400;
+  background: #f0ad4e;
 }
 
 .jd__danger {
-  background: #f8091f;
+  background: #d9534f;
 }
 
 .jd_open-list-user {
