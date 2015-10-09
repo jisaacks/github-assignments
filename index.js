@@ -46,40 +46,53 @@
       users.forEach(function(user){
         var $item, $count, $user, openState, openIssuesCount = issuesByUser[user];
 
-        if ( openIssuesCount > 4 ) {
-          openState = 'jd__danger';
-        }
-        else if (openIssuesCount > 2) {
-          openState = 'jd__caution';
-        }
-        else {
-          openState = 'jd__good';
+        // Get user's actual name
+        var user_url = 'https://api.github.com/users/'+user;
+        if (token) {
+          user_url = user_url + "?access_token=" + token;
         }
 
-        $user = document.createElement('em');
-        $user.classList.add('jd_open-list-user');
-        $user.appendChild(document.createTextNode(user));
+        getJSON(user_url, function (usrObj) {
 
-        $count = document.createElement('strong');
-        $count.classList.add('jd_open-list-count');
-        $count.appendChild(document.createTextNode(openIssuesCount));
+          if ( openIssuesCount > 4 ) {
+            openState = 'jd__danger';
+          }
+          else if (openIssuesCount > 2) {
+            openState = 'jd__caution';
+          }
+          else {
+            openState = 'jd__good';
+          }
 
-        $item = document.createElement('div');
-        $item.classList.add('jd_open-list-item');
-        $item.classList.add(openState);
-        $item.appendChild($user);
-        $item.appendChild(document.createTextNode(' '));
-        $item.appendChild($count);
-        $item.setAttribute("data-user", user);
-        $item.addEventListener("click", function(e){
-          var user = e.currentTarget.getAttribute("data-user");
-          var $input = document.querySelector("#js-issues-search");
-          $input.value = "is:open is:issue assignee:" + user;
-          $form = document.querySelector(".subnav-search");
-          $form.submit();
+          $user = document.createElement('em');
+          $user.classList.add('jd_open-list-user');
+          $user.appendChild(document.createTextNode(usrObj.name.match(/([^\s]+)/i)[0]));
+
+          $count = document.createElement('strong');
+          $count.classList.add('jd_open-list-count');
+          $count.appendChild(document.createTextNode(openIssuesCount));
+
+          $item = document.createElement('div');
+          $item.classList.add('jd_open-list-item');
+          $item.classList.add(openState);
+          $item.appendChild($user);
+          $item.appendChild(document.createTextNode(' '));
+          $item.appendChild($count);
+          $item.setAttribute("data-user", user);
+          $item.addEventListener("click", function(e){
+            var user = e.currentTarget.getAttribute("data-user");
+            var $input = document.querySelector("#js-issues-search");
+            $input.value = "is:open is:issue assignee:" + user;
+            $form = document.querySelector(".subnav-search");
+            $form.submit();
+          });
+
+          if ( openIssuesCount > 2 ) {
+            $list.appendChild($item);
+          }
+
         });
 
-        $list.appendChild($item);
       });
 
       document.querySelector('.subnav').appendChild($list);
