@@ -40,6 +40,7 @@
         return 0;
       }).reverse();
 
+      $('.jd__open-list').remove();
       $list = document.createElement('div');
       $list.classList.add("jd__open-list");
 
